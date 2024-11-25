@@ -1,4 +1,4 @@
-/****************** YOUR NAME: 
+/****************** YOUR NAME: Sean Lee
 
 The instructions describe the missing logic that is needed; you will translate these into JavaScript in the places indicated.
 
@@ -10,10 +10,8 @@ You are encouraged to use the provided naming convention for ease of review.
 /* create variables to hold the values for modelName and duration */
 
 // INSERT YOUR CODE HERE
-
-
-
-
+let modelName = "XYZ";
+let duraction = 0; 
 
 /****************** helper function ******************/
 /* create a function called recalculate() which will
@@ -26,11 +24,21 @@ You are encouraged to use the provided naming convention for ease of review.
 */
 
 // INSERT YOUR CODE HERE
+function recalculate() {
+    //get the calculated-cost span element 
+    let costLabel = document.getElementById("calculated-cost");
+    let cost = 0; 
 
+    //// Calculate the cost based on the current model and duration
+    if (modelName === "XYZ") {
+        cost = duration * 100;
+    } else if (modelName === "CPRG") {
+        cost = duration * 213;
+    }
 
-
-
-
+    // Update the calculated-cost span element
+    costLabel.innerHTML = cost.toFixed(2);
+}
 
 /****************** model button logic ******************/
 
@@ -45,6 +53,24 @@ You are encouraged to use the provided naming convention for ease of review.
     // modelButton.addEventListener("click", changeModel);
 
 // INSERT YOUR CODE HERE
+function changeModel() {
+    // Get the model-text span element
+    let modelText = document.getElementById("model-text");
+
+    // Toggle the model and update the display
+    if (modelName === "XYZ") {
+        modelName = "CPRG";
+        modelText.innerHTML = "Model CPRG";
+    } else {
+        modelName = "XYZ";
+        modelText.innerHTML = "Model XYZ";
+    }
+
+    // Recalculate the cost
+    recalculate();
+}
+
+modelButton.addEventListener("click", changeModel);
 
 
 
@@ -64,6 +90,25 @@ You are encouraged to use the provided naming convention for ease of review.
 */
 
 // INSERT YOUR CODE HERE
+let durationButton = document.getElementById("duration-button");
 
+function changeDuration() {
+    // Get the duration-text span element
+    let durationText = document.getElementById("duration-text");
+
+    // Prompt the user for a new duration
+    let newDuration = parseInt(prompt("Enter new duration (in days):"), 10);
+
+    // Validate and update the duration
+    if (!isNaN(newDuration) && newDuration >= 0) {
+        duration = newDuration;
+        durationText.innerHTML = newDuration;
+        recalculate();
+    } else {
+        alert("Please enter a valid number for the duration.");
+    }
+}
+
+durationButton.addEventListener("click", changeDuration);
 
 
