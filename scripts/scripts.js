@@ -87,7 +87,6 @@ document.addEventListener("DOMContentLoaded", function () {
 */
 
 // INSERT YOUR CODE HERE
-
     let durationButton = document.getElementById("duration-button");
 
     function changeDuration() {
