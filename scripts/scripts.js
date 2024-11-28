@@ -56,10 +56,10 @@ document.addEventListener("DOMContentLoaded", function () {
 // INSERT YOUR CODE HERE
     let modelButton = document.getElementById("model-button");
 
-    function changeModel() {
+    modelButton.addEventListener("click", function () {
         let modelText = document.getElementById("model-text");
 
-        // Toggle the model and update the text
+        // Toggle the model
         if (modelName === "XYZ") {
             modelName = "CPRG";
             modelText.innerHTML = "Model CPRG";
@@ -68,12 +68,8 @@ document.addEventListener("DOMContentLoaded", function () {
             modelText.innerHTML = "Model XYZ";
         }
 
-    // Recalculate the cost
         recalculate();
-    }
-
-// Attach the event listener to the button
-    modelButton.addEventListener("click", changeModel);
+    });
 
 /****************** duration button logic ******************/
 /*  - first, create a variable to represent the "Change Duration" pseudo-button.
@@ -90,22 +86,21 @@ document.addEventListener("DOMContentLoaded", function () {
     let durationButton = document.getElementById("duration-button");
 
     function changeDuration() {
-        // Get the duration-text span element
         let durationText = document.getElementById("duration-text");
 
         // Prompt the user for a new duration
         let newDuration = parseInt(prompt("Enter new duration (in days):"), 10);
 
-        // Validate and update the duration
-        if (!isNaN(newDuration) && newDuration >= 0) {
-            duration = newDuration;
-            durationText.innerHTML = newDuration;
-            recalculate();
-        } else {
-            alert("Please enter a valid number for the duration.");
+        // Handle invalid input by setting a default duration
+        if (isNaN(newDuration) || newDuration < 0) {
+            newDuration = 1; // Default value for invalid input
         }
+
+        // Update the duration and recalculate the cost
+        duration = newDuration;
+        durationText.innerHTML = newDuration;
+        recalculate();
     }
 
-// Attach the event listener to the duration button
     durationButton.addEventListener("click", changeDuration);
 });
